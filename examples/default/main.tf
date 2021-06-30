@@ -10,6 +10,5 @@ data "cloudfoundry_space" "space" {
 module "postgres" {
   source = "philips-labs/postgres-service/hsdp"
 
-  cf_org_name = "test"
   cf_space_id = data.cloudfoundry_space.space.id
 }
