@@ -41,7 +41,7 @@ jobs:
       - name: init terraform example
         run: terraform init -get -backend=false -input=false
       - name: check formatting
-        if: ${{ matrix.terraform == '0.14.5' }}
+        if: ${{ matrix.terraform == '1.0.0' }}
         run: terraform fmt -recursive -check=true -write=false
       - name: validate terraform
         run: terraform validate
