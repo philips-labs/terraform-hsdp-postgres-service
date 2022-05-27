@@ -11,7 +11,11 @@ resource "cloudfoundry_service_instance" "postgres" {
   space = var.cf_space_id
   //noinspection HILUnresolvedReference
   service_plan                   = data.cloudfoundry_service.rds.service_plans[var.plan]
-  replace_on_service_plan_change = true
+  replace_on_service_plan_change = var.replace_on_service_plan_change
+
+  json_params = jsonencode({
+    "MaxAllocatedStorage" : var.max_allocated_storage
+  })
 }
 
 resource "cloudfoundry_service_key" "database_key" {
@@ -43,7 +47,7 @@ resource "cloudfoundry_app" "exporter" {
   }
   annotations = {
     "prometheus.exporter.type" = "pg_exporter"
-    "prometheus.exporter.port" = "9187"
+    "prometheus.exporter.port" = "3100"
     "prometheus.exporter.path" = "/metrics"
   }
 }

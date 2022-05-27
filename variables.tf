@@ -50,3 +50,15 @@ variable "exporter_environment" {
   description = "Additional configuration for the exporter"
   default     = {}
 }
+
+variable "replace_on_service_plan_change" {
+  type        = bool
+  description = "Replaces the instance in case of service plan change. Does not preserve data!"
+  default     = false
+}
+
+variable "max_allocated_storage" {
+  type        = number
+  description = "Sets the maximum storage size (in GB). Enables autoscaling"
+  default     = 100
+}
