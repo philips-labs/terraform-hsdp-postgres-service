@@ -64,7 +64,7 @@ variable "max_allocated_storage" {
 }
 
 variable "json_params" {
-  type        = string
+  type        = map(any)
   description = "provide parameters to configure"
-  default     = ""
+  default     = {}
 }
