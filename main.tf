@@ -12,7 +12,7 @@ resource "cloudfoundry_service_instance" "postgres" {
   //noinspection HILUnresolvedReference
   service_plan                   = data.cloudfoundry_service.rds.service_plans[var.plan]
   replace_on_service_plan_change = var.replace_on_service_plan_change
-
+  json_params                    = var.json_params
   json_params = jsonencode({
     "MaxAllocatedStorage" : var.max_allocated_storage
   })

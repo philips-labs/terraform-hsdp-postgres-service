@@ -62,3 +62,9 @@ variable "max_allocated_storage" {
   description = "Sets the maximum storage size (in GB). Enables autoscaling"
   default     = 100
 }
+
+variable "json_params" {
+  type        = string
+  description = "provide parameters to configure"
+  default     = ""
+}
