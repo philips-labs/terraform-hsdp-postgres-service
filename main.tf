@@ -1,5 +1,10 @@
 locals {
   postfix = var.name_postfix != "" ? var.name_postfix : random_id.id.hex
+  json_parameters = jsonencode(merge
+    (
+      { "MaxAllocatedStorage" : var.max_allocated_storage }, var.json_params
+    )
+  )
 }
 
 resource "random_id" "id" {
@@ -12,10 +17,8 @@ resource "cloudfoundry_service_instance" "postgres" {
   //noinspection HILUnresolvedReference
   service_plan                   = data.cloudfoundry_service.rds.service_plans[var.plan]
   replace_on_service_plan_change = var.replace_on_service_plan_change
+  json_params                    = local.json_parameters
 
-  json_params = jsonencode({
-    "MaxAllocatedStorage" : var.max_allocated_storage
-  })
 }
 
 resource "cloudfoundry_service_key" "database_key" {
